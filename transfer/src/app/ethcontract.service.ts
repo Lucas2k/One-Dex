@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Web3 from 'web3';
-import * as TruffleContract from 'truffle-contract';
+import { environment } from '../environments/environment';
 
 
 declare let require: any;
@@ -12,10 +12,7 @@ declare let window: any;
   providedIn: 'root'
 })
 
-export class EthcontractService {
-  private web3Provider: null;  
-  private contracts: {};
-  
+export class EthcontractService {  
 
   private account: any = null;
   private readonly web3: any;
@@ -28,7 +25,7 @@ export class EthcontractService {
       if (typeof window.web3 !== 'undefined') {
         this.web3 = window.web3.currentProvider;
       } else {
-        this.web3 = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545');
+        this.web3 = new Web3.providers.HttpProvider(environment.testnet_bsc);
       }
       window.web3 = new Web3(window.ethereum);
       //console.log(this.web3);
