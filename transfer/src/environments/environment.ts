@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  testnet_bsc : 'https://data-seed-prebsc-1-s1.binance.org:8545'
+  TESNET_BSC : 'https://data-seed-prebsc-1-s1.binance.org:8545'
 };
 
 /*

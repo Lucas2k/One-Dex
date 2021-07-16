@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as Web3 from 'web3';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 
 declare let require: any;
@@ -25,7 +25,7 @@ export class EthcontractService {
       if (typeof window.web3 !== 'undefined') {
         this.web3 = window.web3.currentProvider;
       } else {
-        this.web3 = new Web3.providers.HttpProvider(environment.testnet_bsc);
+        this.web3 = new Web3.providers.HttpProvider(environment.TESNET_BSC);
       }
       window.web3 = new Web3(window.ethereum);
       //console.log(this.web3);
