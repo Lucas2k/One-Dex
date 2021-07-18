@@ -1,19 +1,32 @@
 
-
-
-<div className="content mr-auto ml-auto">
+ 
+<div class="content mr-auto ml-auto">
   <h1>Issue Token</h1>
+
   <form>
     <input
       type='text'
-      className='form-control mb-1'
+      class='form-control mb-1'
       placeholder='e.g. #FF00FF'
     />
     <input
-      type='submit'
-      className='btn btn-block btn-primary'
+      type='submit' (click)="createNftColor()"
+      class='btn btn-block btn-primary'
       value='MINT'
     />
   </form>
+
 </div>
+
+<h2 class="row mt-5 text-center">My collectionable colors</h2>
+<hr/>
+<div class="row text-center">
+  
+      <div  *ngFor="let color of colors" class="col-md-3 mb-3">
+        <div class="token" [ngStyle]= "{ 'background-color': color  }"  ></div>
+        <div>{{color}}</div>
+      </div>
+ 
+</div>
+
 

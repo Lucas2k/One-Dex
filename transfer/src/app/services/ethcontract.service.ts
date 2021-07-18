@@ -7,6 +7,7 @@ declare let require: any;
 declare let window: any;
 
 //let tokenAbi = require('../../../build/contracts/Payment.json');
+let nftColorAbi = require('../../../../build/contracts/NftColor.json');
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class EthcontractService {
 
   private account: any = null;
   private readonly web3: any;
-  private enable: any;
+  //private enable: any;
   
   constructor() { 
     if (window.ethereum === undefined) {
@@ -82,6 +83,37 @@ export class EthcontractService {
     }) as Promise<any>;
   }
   
+  public async mintColor(colorStr): Promise<any> {
+    const  colorBytes = this.colorStringToBytes(colorStr);
+    return  new Promise((resolve, reject) => {
+      var MyContract = window.web3.eth.contract(nftColorAbi);
+      var myContractInstance = MyContract.at("0xF8da2844989F3FbFc92271F53E0af0666b82b4DC");
+ 
+      myContractInstance.deployed().then(function(instance) {
+        return instance.mint(colorBytes);
+      }).then(function(status) {
+        if(status) {
+          return resolve({status:true});
+        }
+      }).catch(function(error){
+        console.log(error);
+
+        return reject("Error mint nft color");
+      });
+
+    }) as Promise<any>;
+  }
+
+   colorStringToBytes(str) {
+     console.log(window.web3);
+     
+    if (str.length !== 7 || str.charAt(0) !== '#') {
+      throw new Error('invalid color string');
+    }
+    const hexStr = '0x' + str.substring(1);
+    return window.web3.utils.hexToBytes(hexStr);
+  }
+
  /*  transferEther(
     _transferFrom,
     _transferTo,
